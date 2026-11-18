@@ -1,0 +1,10 @@
+{
+  "name": "Blood Link — Blood Donor & Receiver",
+  "short_name": "Blood Link",
+  "description": "Connect local blood donors and receivers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f3f0",
+  "theme_color": "#a51e35",
+  "icons": [{"src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}]
+}

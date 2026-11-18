@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#a51e35"><link rel="manifest" href="/manifest.json"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="description" content="Blood Link connects blood donors and receivers in their local community.">
+<title>Blood Link - Life Saving Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="toast" class="toast" role="status"></div>
+<header class="topbar">
+  <a class="logo" href="#"><span class="logo-mark">✚</span>Blood <b>Link</b></a>
+  <nav id="mainNav" class="nav hidden">
+    <a href="#dashboard">Dashboard</a><a href="#agenda">My agenda</a><a href="#settings">Settings</a>
+  </nav>
+  <div class="top-actions"><span id="rolePill" class="role-pill hidden"></span><button id="signOut" class="text-btn hidden">Switch profile</button></div>
+</header>
+
+<main>
+<section id="welcome" class="welcome">
+  <div class="welcome-copy">
+   <div class="eyebrow"><span class="dot"></span> CONNECTING DONORS. SAVING LIVES.</div>
+    <h1>Blood Link<br><em>Save Lives Together.</em></h1>
+    <p>Every second matters. Connect with blood donors and receivers in your community and help save precious lives.</p>
+    <div class="welcome-points"><span>✚ Local blood-group matching</span><span>♡ Purpose-built donor & receiver spaces</span><span>⌁ Personal notification preferences</span></div>
+  </div>
+  <div class="welcome-panel">
+    <div class="panel-step">GET STARTED <span>01 / 02</span></div>
+    <h2>How would you like to use Blood Link?</h2>
+    <p>Choose your role to open the right workspace.</p>
+    <button class="role-choice" data-role="donor"><span class="role-icon donor-icon">♡</span><span><b>I'm a Donor</b><small>Help people nearby. Manage availability and respond to requests.</small></span><strong>→</strong></button>
+    <button class="role-choice" data-role="receiver"><span class="role-icon receiver-icon">✚</span><span><b>I'm a Receiver</b><small>Request blood, track responses and manage your requests.</small></span><strong>→</strong></button>
+    <small class="privacy-hint">Your role determines the tools and information shown in your workspace.</small>
+  </div>
+</section>
+
+<section id="profileSetup" class="setup hidden">
+  <div class="setup-heading"><button id="backRoles" class="back-btn">← Back</button><span class="eyebrow">PROFILE SETUP</span><h2 id="setupTitle">Create your donor profile</h2><p id="setupDescription">A few details help us connect you with the right people.</p></div>
+  <form id="profileForm" class="surface setup-form">
+    <input type="hidden" name="role" id="profileRole">
+    <div class="field-grid">
+      <label>Full name<input name="name" required maxlength="80" placeholder="Your name"></label>
+      <label>Email address<input name="email" type="email" required placeholder="you@example.com"></label>
+      <label>Phone number<input name="phone" type="tel" required placeholder="+91 98765 43210"></label>
+      <label>City<input name="city" required placeholder="e.g. Bengaluru"></label>
+      <label>Area / locality<input name="area" placeholder="e.g. Jayanagar"></label>
+      <label class="donor-only">Blood group<select name="bloodGroup"><option value="">Select blood group</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+      <label class="donor-only">Age<input name="age" type="number" min="18" max="100" placeholder="18 or above"></label>
+    </div>
+    <label class="toggle-line donor-only"><input type="checkbox" name="available" checked><span><b>Available to donate</b><small>You can change this anytime in your donor dashboard.</small></span></label>
+    <label class="check-line"><input type="checkbox" name="consent" required><span>I consent to Blood Link storing my profile details and using my contact information for relevant blood-request coordination.</span></label>
+    <button class="btn primary wide" type="submit">Create my workspace <span>→</span></button>
+    <p id="profileMessage" class="message"></p>
+  </form>
+</section>
+
+<section id="workspace" class="workspace hidden">
+  <div class="dashboard-head">
+    <div><span class="eyebrow" id="dashEyebrow">YOUR WORKSPACE</span><h1 id="welcomeName">Welcome back.</h1><p id="dashSubtitle">Your community activity at a glance.</p></div>
+    <div class="head-mark" id="headMark">♡</div>
+  </div>
+  <div class="stats-grid" id="statsGrid"></div>
+
+  <div class="workspace-grid">
+    <section class="surface main-module" id="mainModule">
+      <div class="module-heading"><div><span class="eyebrow">YOUR MODULE</span><h2 id="moduleTitle">Your activity</h2></div><span class="module-index" id="moduleIndex">01</span></div>
+      <div id="moduleContent"></div>
+    </section>
+    <aside class="surface side-module">
+      <div class="module-heading"><div><span class="eyebrow">QUICK ACCESS</span><h2>Your tools</h2></div></div>
+      <div id="quickTools"></div>
+      <div class="sound-box" id="settings">
+        <span class="eyebrow">PERSONAL PREFERENCES</span><h3>Notification sound</h3>
+        <p>Choose the sound played for new in-app alerts while Blood Link is open.</p>
+        <select id="soundChoice" aria-label="Choose notification sound">
+          <option value="chime">Soft chime</option><option value="bell">Clear bell</option><option value="pulse">Heartbeat pulse</option><option value="pop">Gentle pop</option><option value="none">Silent</option>
+        </select>
+        <button id="testSound" class="btn outline wide">▶ Test sound</button>
+        <label class="toggle-line compact"><input type="checkbox" id="browserAlerts"><span><b>Browser notifications</b><small>Ask permission to show desktop alerts.</small></span></label>
+        <p class="tiny-note">Sound is played in this browser while the app is open. Browser and device settings may block audio or alerts.</p>
+      </div>
+    </aside>
+  </div>
+  <section class="surface agenda-section" id="agenda">
+    <div class="module-heading"><div><span class="eyebrow">STAY ORGANIZED</span><h2 id="agendaTitle">My agenda</h2></div><span class="module-index">03</span></div>
+    <div id="agendaContent" class="agenda-list"></div>
+  </section>
+  <section class="surface notifications-section">
+    <div class="module-heading"><div><span class="eyebrow">STAY IN THE LOOP</span><h2>Notifications</h2></div><button id="clearNotifications" class="text-btn">Mark all read</button></div>
+    <div id="notificationList" class="notification-list"><p class="muted">No new notifications.</p></div>
+  </section>
+</section>
+</main>
+<footer><a class="logo" href="#"><span class="logo-mark">✚</span>Blood <b>Link</b></a><p>Connecting communities. Supporting lifesaving care.</p><span>© <span id="year"></span> Blood Link</span></footer>
+<script src="app.js"></script><script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(console.warn));</script>
+</body></html>
